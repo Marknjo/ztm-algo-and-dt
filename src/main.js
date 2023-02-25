@@ -1,6 +1,10 @@
 import "./css/style.css";
 import "./fouc-fix/fouc-fix";
 
+/* Other Scripts Here */
+import "./js/custom-array";
+
+/* Default text */
 document.querySelector("#app").innerHTML = `
   <div>
     <h1>JavaScript Algorithm and Data Structures</h1>
@@ -10,5 +14,3 @@ document.querySelector("#app").innerHTML = `
     </div>
   </div>
 `;
-
-/* Other Scripts Here */
