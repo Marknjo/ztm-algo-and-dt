@@ -7,11 +7,18 @@ class CustomArray {
   }
 
   push(value) {
-    this.#data[this.length] = value;
+    try {
+      // stop unsupported input types
+      this.#isUnsupported(value);
 
-    this.length++;
+      this.#data[this.length] = value;
 
-    return this.length;
+      this.length++;
+
+      return this.length;
+    } catch (error) {
+      this.error(error.message);
+    }
   }
 
   pop() {
@@ -23,38 +30,45 @@ class CustomArray {
   }
 
   unShift(values) {
-    if (this.length === 0) {
-      this.push(values);
-    }
+    try {
+      /// Stop unsupported input types
+      this.#isUnsupported(values);
 
-    let args = [...arguments];
+      if (this.length === 0) {
+        this.push(values);
+      }
 
-    if (typeof values !== "string" && Array.isArray(values)) {
-      args = values;
-    }
+      let args = [...arguments];
 
-    const argsLen = args.length;
+      if (typeof values !== "string" && Array.isArray(values)) {
+        args = values;
+      }
 
-    let tempDataHolder = {};
-    for (let key = 0; key < this.length; key++) {
-      tempDataHolder[+key + argsLen] = this.#data[key];
-    }
+      const argsLen = args.length;
 
-    if (argsLen > 1) {
-      args.forEach((value, key) => {
-        this.#data[key] = value;
-        this.length++;
-      });
+      let tempDataHolder = {};
+      for (let key = 0; key < this.length; key++) {
+        tempDataHolder[+key + argsLen] = this.#data[key];
+      }
 
+      if (argsLen > 1) {
+        args.forEach((value, key) => {
+          this.#data[key] = value;
+          this.length++;
+        });
+
+        this.#data = { ...this.#data, ...tempDataHolder };
+        return this.length;
+      }
+
+      this.#data[0] = values;
       this.#data = { ...this.#data, ...tempDataHolder };
+
+      this.length++;
       return this.length;
+    } catch (error) {
+      console.error(error.message);
     }
-
-    this.#data[0] = values;
-    this.#data = { ...this.#data, ...tempDataHolder };
-
-    this.length++;
-    return this.length;
   }
 
   /**
@@ -86,21 +100,47 @@ class CustomArray {
 
     return firstItem;
   }
+
+  #isObject(value) {
+    return Object.prototype.toString.call(value) === "[object Object]";
+  }
+
+  /**
+   * Stop unsupported input types
+   * @param {any} value
+   */
+  #isUnsupported(value) {
+    try {
+      if (
+        value === null ||
+        value === undefined ||
+        `${value}`.trim() === "" ||
+        this.#isObject(value)
+      ) {
+        throw new Error(
+          `TypeError: ${JSON.stringify(value)} is unsupported input type`
+        );
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 const array = new CustomArray();
 
+// array.push(null);
 array.push("my");
 array.push("name");
 array.push("is");
 array.push("James");
 
-array.pop();
+// array.pop();
 
-array.unShift("Hi");
+// array.unShift(null);
 
-array.shift();
-array.shift();
+// array.shift();
+// array.shift();
 
 console.log(array);
 console.log(array.length);
