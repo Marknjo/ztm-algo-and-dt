@@ -11,17 +11,31 @@ class CustomArray {
       // stop unsupported input types
       this.#isUnsupported(input);
 
-      if (!Array.isArray(input)) {
-        this.#data[this.length] = input;
+      let args = [...arguments];
 
-        this.length++;
+      if (Array.isArray(input)) args = input;
+
+      const argsLen = args.length;
+
+      if (argsLen > 1) {
+        args.forEach((arg) => {
+          this.#data[this.length] = arg;
+          this.length++;
+        });
 
         return this.length;
       }
 
+      /// Pop receives only one argument
+      this.#data[this.length] = input;
+
+      this.length++;
+
+      return this.length;
+
       //return this.#multipleInputs(input);
     } catch (error) {
-      this.error(error.message);
+      console.error(error.message);
     }
   }
 
@@ -140,6 +154,10 @@ class CustomArray {
       throw error;
     }
   }
+
+  printData() {
+    return Object.values(this.#data);
+  }
 }
 
 const array = new CustomArray();
@@ -150,14 +168,14 @@ array.push("name");
 array.push("is");
 array.push("James");
 
-array.push("I", "come", "from", "Arizona", ",", "United States");
+array.push(["I", "come", "from", "Arizona", ",", "United States"]);
 
-// array.pop();
+array.pop();
 
-// array.unShift("I", "come", "from", "Arizona", ",", "United States");
+array.unShift("I", "come", "from", "Arizona", ",", "United States");
 
-// array.shift();
-// array.shift();
+array.shift();
+array.shift();
 
 console.log(array);
-console.log(array.length);
+console.log(array.printData());
