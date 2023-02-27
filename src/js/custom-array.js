@@ -27,7 +27,12 @@ class CustomArray {
       this.push(values);
     }
 
-    const args = [...arguments];
+    let args = [...arguments];
+
+    if (typeof values !== "string" && Array.isArray(values)) {
+      args = values;
+    }
+
     const argsLen = args.length;
 
     let tempDataHolder = {};
@@ -62,7 +67,7 @@ array.push("James");
 
 array.pop();
 
-array.unShift("Hi", ",");
+array.unShift("Hi");
 
 console.log(array);
 console.log(array.length);
