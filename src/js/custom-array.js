@@ -56,6 +56,36 @@ class CustomArray {
     this.length++;
     return this.length;
   }
+
+  /**
+   * Remove first item from the array
+   */
+  shift() {
+    if (this.length === 0) {
+      return undefined;
+    }
+    let firstItem = this.#data[0];
+
+    /// Only one item
+    if (this.length === 1) {
+      delete this.#data[0];
+      this.length = 0;
+      return firstItem;
+    }
+
+    /// More than one item
+    delete this.#data[0];
+    const tempDataHolder = {};
+
+    for (let item = 1; item < this.length; item++) {
+      tempDataHolder[item - 1] = this.#data[item];
+    }
+
+    this.#data = { ...tempDataHolder };
+    this.length--;
+
+    return firstItem;
+  }
 }
 
 const array = new CustomArray();
@@ -68,6 +98,9 @@ array.push("James");
 array.pop();
 
 array.unShift("Hi");
+
+array.shift();
+array.shift();
 
 console.log(array);
 console.log(array.length);
