@@ -6,16 +6,20 @@ class CustomArray {
     return this.#data[index];
   }
 
-  push(value) {
+  push(input) {
     try {
       // stop unsupported input types
-      this.#isUnsupported(value);
+      this.#isUnsupported(input);
 
-      this.#data[this.length] = value;
+      if (!Array.isArray(input)) {
+        this.#data[this.length] = input;
 
-      this.length++;
+        this.length++;
 
-      return this.length;
+        return this.length;
+      }
+
+      //return this.#multipleInputs(input);
     } catch (error) {
       this.error(error.message);
     }
@@ -29,41 +33,25 @@ class CustomArray {
     return lastItem;
   }
 
-  unShift(values) {
+  unShift(input) {
     try {
       /// Stop unsupported input types
-      this.#isUnsupported(values);
+      this.#isUnsupported(input);
 
       if (this.length === 0) {
-        this.push(values);
+        this.push(input);
       }
 
-      let args = [...arguments];
+      let multipleInputResponse = this.#multiUnshift(
+        Array.isArray(input) ? input : [...arguments]
+      );
 
-      if (typeof values !== "string" && Array.isArray(values)) {
-        args = values;
+      if (typeof multipleInputResponse === "number") {
+        return multipleInputResponse;
       }
 
-      const argsLen = args.length;
-
-      let tempDataHolder = {};
-      for (let key = 0; key < this.length; key++) {
-        tempDataHolder[+key + argsLen] = this.#data[key];
-      }
-
-      if (argsLen > 1) {
-        args.forEach((value, key) => {
-          this.#data[key] = value;
-          this.length++;
-        });
-
-        this.#data = { ...this.#data, ...tempDataHolder };
-        return this.length;
-      }
-
-      this.#data[0] = values;
-      this.#data = { ...this.#data, ...tempDataHolder };
-
+      this.#data[0] = input;
+      this.#data = { ...this.#data, ...multipleInputResponse };
       this.length++;
       return this.length;
     } catch (error) {
@@ -101,6 +89,33 @@ class CustomArray {
     return firstItem;
   }
 
+  /**
+   * Supports multiple inputs in unshift and push
+   * @param {number|string|array} values
+   * @returns number
+   */
+  #multiUnshift(values) {
+    const argsLen = values.length;
+
+    let tempDataHolder = {};
+    for (let key = 0; key < this.length; key++) {
+      tempDataHolder[+key + argsLen] = this.#data[key];
+    }
+
+    if (argsLen > 1) {
+      values.forEach((value, key) => {
+        this.#data[key] = value;
+        this.length++;
+      });
+
+      this.#data = { ...this.#data, ...tempDataHolder };
+
+      return this.length;
+    }
+
+    return tempDataHolder;
+  }
+
   #isObject(value) {
     return Object.prototype.toString.call(value) === "[object Object]";
   }
@@ -135,9 +150,11 @@ array.push("name");
 array.push("is");
 array.push("James");
 
+array.push("I", "come", "from", "Arizona", ",", "United States");
+
 // array.pop();
 
-// array.unShift(null);
+// array.unShift("I", "come", "from", "Arizona", ",", "United States");
 
 // array.shift();
 // array.shift();
