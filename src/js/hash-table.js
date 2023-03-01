@@ -1,4 +1,6 @@
 class HashTable {
+  #data;
+
   constructor(size) {
     this.#data = new Array(size);
   }
@@ -12,8 +14,26 @@ class HashTable {
 
     return hash;
   }
+
+  set(key, value) {
+    console.time("Set");
+    let address = this.#hash(key);
+
+    if (!this.#data[address]) {
+      this.#data[address] = [];
+    }
+    this.#data[address].push([key, value]);
+    console.timeEnd("Set");
+  }
+
+  printData() {
+    return this.#data;
+  }
 }
 
-const hashTable = new HashTable(50);
+const hashTable = new HashTable(2);
 
 hashTable.set("grapes", 10000);
+hashTable.set("grapes", 10000);
+
+console.log(hashTable.printData());
