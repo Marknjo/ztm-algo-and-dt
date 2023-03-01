@@ -117,14 +117,7 @@ class CustomArray {
     }
 
     /// Index is n (between 0 and max n)
-    delete this.#data[index];
-
-    for (let i = index; i < this.length - 1; i++) {
-      this.#data[i] = this.#data[i + 1];
-    }
-
-    delete this.#data[this.length - 1];
-    this.length--;
+    this.#shiftToLeft(index);
   }
 
   reverse() {
@@ -188,6 +181,22 @@ class CustomArray {
     } catch (error) {
       throw error;
     }
+  }
+
+  /**
+   * Helper method to shift items and index to left on remove/delete of item by index
+   *  - Keeps array index aligned
+   * @param {number} index Index of the item removed
+   */
+  #shiftToLeft(index) {
+    delete this.#data[index];
+
+    for (let i = index; i < this.length - 1; i++) {
+      this.#data[i] = this.#data[i + 1];
+    }
+
+    delete this.#data[this.length - 1];
+    this.length--;
   }
 
   printData() {
