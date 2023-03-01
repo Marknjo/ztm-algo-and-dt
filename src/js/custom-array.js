@@ -103,6 +103,30 @@ class CustomArray {
     return firstItem;
   }
 
+  remove(index) {
+    if (!this.#data[index]) {
+      return undefined;
+    }
+
+    if (index === 0) {
+      return this.shift();
+    }
+
+    if (index === this.length - 1) {
+      return this.pop();
+    }
+
+    /// Index is n (between 0 and max n)
+    delete this.#data[index];
+
+    for (let i = index; i < this.length - 1; i++) {
+      this.#data[i] = this.#data[i + 1];
+    }
+
+    delete this.#data[this.length - 1];
+    this.length--;
+  }
+
   /**
    * Supports multiple inputs in unshift and push
    * @param {number|string|array} values
@@ -170,12 +194,14 @@ array.push("James");
 
 array.push(["I", "come", "from", "Arizona", ",", "United States"]);
 
-array.pop();
+// array.pop();
 
-array.unShift("I", "come", "from", "Arizona", ",", "United States");
+// array.unShift("I", "come", "from", "Arizona", ",", "United States");
 
-array.shift();
-array.shift();
+// array.shift();
+// array.shift();
+
+array.remove(1);
 
 console.log(array);
 console.log(array.printData());
