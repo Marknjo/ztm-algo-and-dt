@@ -2,7 +2,8 @@ import "./css/style.css";
 import "./fouc-fix/fouc-fix";
 
 /* Other Scripts Here */
-import "./js/custom-array";
+// import "./js/custom-array";
+import "./js/hash-table";
 
 /* Default text */
 document.querySelector("#app").innerHTML = `
