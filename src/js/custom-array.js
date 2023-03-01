@@ -127,6 +127,17 @@ class CustomArray {
     this.length--;
   }
 
+  reverse() {
+    const tempData = {};
+
+    for (let i = this.length - 1; i >= 0; i--) {
+      tempData[this.length - (i + 1)] = this.#data[i];
+    }
+    this.#data = tempData;
+
+    return this.length;
+  }
+
   /**
    * Supports multiple inputs in unshift and push
    * @param {number|string|array} values
@@ -201,7 +212,8 @@ array.push(["I", "come", "from", "Arizona", ",", "United States"]);
 // array.shift();
 // array.shift();
 
-array.remove(1);
+// array.remove(1);
+array.reverse();
 
 console.log(array);
 console.log(array.printData());
