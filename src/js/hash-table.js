@@ -51,6 +51,19 @@ class HashTable {
     return foundValues.length > 1 ? foundValues : foundValues[0];
   }
 
+  keys() {
+    // Perfect condition - no collision
+    return [
+      ...new Set(
+        this.#data.map((data) => {
+          if (data) {
+            return data[0][0];
+          }
+        })
+      ),
+    ].splice(1);
+  }
+
   printData() {
     return this.#data;
   }
@@ -59,9 +72,13 @@ class HashTable {
 const hashTable = new HashTable(50);
 
 hashTable.set("grapes", 10000);
+hashTable.set("oranges", 70);
+hashTable.set("dates", 190);
 hashTable.set("grapes", 50);
 hashTable.set("pineapples", 104);
 
 console.log(hashTable.get("pineapples"));
+
+console.log(hashTable.keys());
 
 console.log(hashTable.printData());
