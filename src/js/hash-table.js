@@ -56,6 +56,10 @@ class HashTable {
     return this.#getKeysOrValues(0);
   }
 
+  values() {
+    return this.#getKeysOrValues(1);
+  }
+
   printData() {
     return this.#data;
   }
@@ -85,5 +89,6 @@ hashTable.set("pineapples", 104);
 // console.log(hashTable.get("pineapples"));
 
 console.log(hashTable.keys());
+console.log(hashTable.values());
 
 // console.log(hashTable.printData());
