@@ -53,20 +53,24 @@ class HashTable {
 
   keys() {
     // Perfect condition - no collision
-    return [
-      ...new Set(
-        this.#data.map((data) => {
-          if (data.length > 1) {
-            return data.map((subData) => subData[0]);
-          }
-          return data[0][0];
-        })
-      ),
-    ].splice(1);
+    return this.#getKeysOrValues(0);
   }
 
   printData() {
     return this.#data;
+  }
+
+  #getKeysOrValues(position) {
+    return [
+      ...new Set(
+        this.#data.map((data) => {
+          if (data.length > 1) {
+            return data.map((subData) => subData[position]);
+          }
+          return data[0][position];
+        })
+      ),
+    ].splice(1);
   }
 }
 
