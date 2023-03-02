@@ -56,6 +56,21 @@ class HashTable {
     return this.#getKeysOrValues(0);
   }
 
+  delete(key) {
+    const foundData = this.get(key);
+
+    if (!foundData) {
+      return undefined;
+    }
+
+    const address = this.#hash(key);
+    const deletedData = this.#data[address];
+
+    delete this.#data[address];
+
+    return deletedData;
+  }
+
   values() {
     return this.#getKeysOrValues(1);
   }
@@ -88,7 +103,11 @@ hashTable.set("pineapples", 104);
 
 // console.log(hashTable.get("pineapples"));
 
-console.log(hashTable.keys());
-console.log(hashTable.values());
+// console.log(hashTable.keys());
+// console.log(hashTable.values());
 
-// console.log(hashTable.printData());
+// console.log(hashTable.get("pineapples"));
+
+console.log(hashTable.delete("grapes"));
+
+console.log(hashTable.printData());
