@@ -3,7 +3,8 @@ import "./fouc-fix/fouc-fix";
 
 /* Other Scripts Here */
 // import "./js/custom-array";
-import "./js/hash-table";
+// import "./js/hash-table";
+import "./js/liked-list";
 
 /* Default text */
 document.querySelector("#app").innerHTML = `
