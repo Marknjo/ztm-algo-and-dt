@@ -56,9 +56,10 @@ class HashTable {
     return [
       ...new Set(
         this.#data.map((data) => {
-          if (data) {
-            return data[0][0];
+          if (data.length > 1) {
+            return data.map((subData) => subData[0]);
           }
+          return data[0][0];
         })
       ),
     ].splice(1);
@@ -77,8 +78,8 @@ hashTable.set("dates", 190);
 hashTable.set("grapes", 50);
 hashTable.set("pineapples", 104);
 
-console.log(hashTable.get("pineapples"));
+// console.log(hashTable.get("pineapples"));
 
 console.log(hashTable.keys());
 
-console.log(hashTable.printData());
+// console.log(hashTable.printData());
