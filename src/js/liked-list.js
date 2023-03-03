@@ -40,6 +40,22 @@ class List {
     this.length++;
     return this;
   }
+
+  values() {
+    let listItem = [];
+    let nextList = this.#head;
+
+    // Add values till next is null
+    while (nextList.next) {
+      listItem.push(nextList.value);
+      nextList = nextList.next;
+    }
+
+    // Add tail item to the collection
+    listItem.push(this.#tail.value);
+
+    return listItem;
+  }
 }
 
 const list = new List(12);
@@ -47,4 +63,4 @@ const list = new List(12);
 list.append(10);
 list.append(2);
 
-console.log(list);
+console.log(list.values());
