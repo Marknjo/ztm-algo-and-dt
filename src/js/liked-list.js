@@ -53,6 +53,25 @@ class List {
     return this.values();
   }
 
+  lookup(value) {
+    let parentNode = this.#head;
+
+    /// Search for all values minus tail
+    while (parentNode.next !== null) {
+      if (parentNode.value === value) {
+        return value;
+      }
+      parentNode = parentNode.next;
+    }
+
+    /// Check last item in the entry
+    if (this.#tail.value === value) {
+      return value;
+    }
+
+    return false;
+  }
+
   values() {
     let listItem = [];
     let nextList = this.#head;
@@ -91,6 +110,8 @@ list.append(2);
 list.append(4);
 list.prepend(5);
 list.prepend(-1);
+
+console.log(list.lookup(4));
 
 console.log(list.values(), list.length);
 console.log(list.showList());
