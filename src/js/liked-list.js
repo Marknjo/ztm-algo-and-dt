@@ -1,37 +1,41 @@
-class Node {}
+class Node {
+  head = {};
 
-class List {
   constructor(value) {
     this.head = {
       value: value || null,
       next: null,
     };
+  }
+}
 
-    this.tail = this.head;
+class List {
+  #head = {};
+  #tail = {};
+  length = 0;
+
+  constructor(value) {
+    const newNode = new Node(value);
+    this.#head = newNode.head;
+
+    this.#tail = this.#head;
     this.length = value ? 1 : 0;
   }
 
   append(value) {
+    const newNode = new Node(value);
     // Handle list was initialize without default values
     if (this.length === 0) {
-      this.head = {
-        value,
-        next: null,
-      };
+      this.#head = newNode.head;
+      this.#tail = newNode.head;
 
-      this.tail = this.head;
+      this.length++;
+      return this;
     }
 
     /// List was initializes with default values
-    if (this.length !== 0) {
-      const newNode = {
-        value,
-        next: null,
-      };
-
-      this.tail.next = newNode;
-      this.tail = newNode;
-    }
+    this.#tail.next = newNode.head;
+    this.#tail = newNode.head;
 
     this.length++;
     return this;
