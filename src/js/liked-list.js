@@ -96,6 +96,43 @@ class List {
     return this.values();
   }
 
+  deleteByValue(value) {
+    if (!this.lookup(value)) {
+      return undefined;
+    }
+
+    this.length--;
+
+    // remove first node
+    if (value === this.#head.value) {
+      this.#head.next = this.#head.next;
+      this.#head = this.#head.next;
+      return this.values;
+    }
+
+    let currentNode = this.#head;
+    let prevNode = this.#head;
+
+    while (true) {
+      if (currentNode.value === value) {
+        // remove last node
+        if (currentNode.value === this.#tail.value) {
+          prevNode.next = null;
+          this.#tail = prevNode;
+          break;
+        }
+
+        prevNode.next = currentNode.next;
+        break;
+      }
+
+      prevNode = currentNode;
+      currentNode = currentNode.next;
+    }
+
+    return this.values;
+  }
+
   values() {
     let listItem = [];
     let nextList = this.#head;
@@ -134,11 +171,17 @@ list.append(2);
 list.append(4);
 list.prepend(5);
 list.prepend(-1);
+list.prepend(5);
 
 // console.log(list.lookup(4));
 
 list.insert(2, 20);
 list.insert(6, 114);
+console.log(list.values(), list.length);
+// console.log(list.showList());
+list.deleteByValue(4);
+list.deleteByValue(5);
+list.deleteByValue(5);
 
 console.log(list.values(), list.length);
 console.log(list.showList());
