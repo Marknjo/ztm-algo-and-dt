@@ -72,6 +72,30 @@ class List {
     return false;
   }
 
+  insert(index, value) {
+    if (index >= this.length) {
+      this.append(value);
+      return;
+    }
+
+    const newNode = new Node(value);
+    let currentNode = this.#head;
+    let count = 1;
+
+    while (count <= index) {
+      if (count === index - 1) {
+        newNode.head.next = currentNode.next;
+        currentNode.next = newNode.head;
+        this.length++;
+        break;
+      }
+      currentNode = currentNode.next;
+      count++;
+    }
+
+    return this.values();
+  }
+
   values() {
     let listItem = [];
     let nextList = this.#head;
@@ -111,7 +135,10 @@ list.append(4);
 list.prepend(5);
 list.prepend(-1);
 
-console.log(list.lookup(4));
+// console.log(list.lookup(4));
+
+list.insert(2, 20);
+list.insert(6, 114);
 
 console.log(list.values(), list.length);
 console.log(list.showList());
