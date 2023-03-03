@@ -133,6 +133,46 @@ class List {
     return this.values;
   }
 
+  delete(index) {
+    if (index > this.length || index <= 0) {
+      return undefined;
+    }
+
+    // remove first node
+    if (index === 1) {
+      this.#head.next = this.#head.next;
+      this.#head = this.#head.next;
+      this.length--;
+      return this.values;
+    }
+
+    let currentNode = this.#head;
+    let prevNode = this.#head;
+    let count = 1;
+
+    while (count <= index) {
+      if (count === index) {
+        // remove last node
+        if (index === this.length) {
+          prevNode.next = null;
+          this.#tail = prevNode;
+          break;
+        }
+
+        // remove in between head and tail nodes
+        prevNode.next = currentNode.next;
+        break;
+      }
+
+      prevNode = currentNode;
+      currentNode = currentNode.next;
+      count++;
+    }
+
+    this.length--;
+    return this.values;
+  }
+
   values() {
     let listItem = [];
     let nextList = this.#head;
@@ -179,9 +219,10 @@ list.insert(2, 20);
 list.insert(6, 114);
 console.log(list.values(), list.length);
 // console.log(list.showList());
-list.deleteByValue(4);
-list.deleteByValue(5);
-list.deleteByValue(5);
+list.delete(9);
+// list.delete(6);
+// list.deleteByValue(5);
+// list.deleteByValue(5);
 
 console.log(list.values(), list.length);
 console.log(list.showList());
