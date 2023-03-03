@@ -69,6 +69,13 @@ class List {
     return listItem;
   }
 
+  showList() {
+    return {
+      list: this.#head,
+      length: this.length,
+    };
+  }
+
   #initList(value, newNode) {
     this.#head = newNode.head;
 
