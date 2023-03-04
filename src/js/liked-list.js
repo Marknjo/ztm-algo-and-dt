@@ -16,20 +16,20 @@ class List {
 
   constructor(value) {
     const newNode = new Node(value);
-    this.#initList(value, newNode);
+    this.#initList(newNode);
   }
 
   prepend(value) {
     const newNode = new Node(value);
+    let currentHeadNode = this.#head;
 
-    // handle empty list
+    // Handle empty list
     if (this.length === 0) {
-      this.#initList(value, newNode);
+      this.#initList(newNode);
       return this.values();
     }
 
     // handle list with head
-    const currentHeadNode = this.#head;
     this.#head = newNode.head;
     this.#head.next = currentHeadNode;
     this.length++;
@@ -39,34 +39,31 @@ class List {
 
   append(value) {
     const newNode = new Node(value);
+
     // Handle list was initialize without default values
     if (this.length === 0) {
-      this.#initList(value, newNode);
+      this.#initList(newNode);
       return this.values();
     }
 
-    /// List was initializes with default values
+    // List was initialized with default values
     this.#tail.next = newNode.head;
     this.#tail = newNode.head;
-
     this.length++;
+
     return this.values();
   }
 
   lookup(value) {
     let parentNode = this.#head;
 
-    /// Search for all values minus tail
-    while (parentNode.next !== null) {
+    // Search for all values till tail.
+    while (parentNode !== null) {
       if (parentNode.value === value) {
         return value;
       }
-      parentNode = parentNode.next;
-    }
 
-    /// Check last item in the entry
-    if (this.#tail.value === value) {
-      return value;
+      parentNode = parentNode.next;
     }
 
     return false;
@@ -80,15 +77,18 @@ class List {
 
     const newNode = new Node(value);
     let currentNode = this.#head;
+    let prevNode = null;
     let count = 1;
 
     while (count <= index) {
-      if (count === index - 1) {
-        newNode.head.next = currentNode.next;
-        currentNode.next = newNode.head;
+      if (count === index) {
+        newNode.head.next = currentNode;
+        prevNode.next = newNode.head;
         this.length++;
         break;
       }
+
+      prevNode = currentNode;
       currentNode = currentNode.next;
       count++;
     }
@@ -103,25 +103,26 @@ class List {
 
     this.length--;
 
-    // remove first node
+    // Remove first node
     if (value === this.#head.value) {
       this.#head.next = this.#head.next;
       this.#head = this.#head.next;
-      return this.values;
+      return this.values();
     }
 
     let currentNode = this.#head;
-    let prevNode = this.#head;
+    let prevNode = null;
 
     while (true) {
       if (currentNode.value === value) {
-        // remove last node
-        if (currentNode.value === this.#tail.value) {
+        // Remove last node
+        if (currentNode === this.#tail) {
           prevNode.next = null;
           this.#tail = prevNode;
           break;
         }
 
+        // Remove in between head and tail nodes
         prevNode.next = currentNode.next;
         break;
       }
@@ -130,7 +131,7 @@ class List {
       currentNode = currentNode.next;
     }
 
-    return this.values;
+    return this.values();
   }
 
   delete(index) {
@@ -138,28 +139,28 @@ class List {
       return undefined;
     }
 
-    // remove first node
+    // Remove first node
     if (index === 1) {
       this.#head.next = this.#head.next;
       this.#head = this.#head.next;
       this.length--;
-      return this.values;
+      return this.values();
     }
 
     let currentNode = this.#head;
-    let prevNode = this.#head;
+    let prevNode = null;
     let count = 1;
 
     while (count <= index) {
       if (count === index) {
-        // remove last node
-        if (index === this.length) {
+        // Remove last node
+        if (currentNode === this.#tail) {
           prevNode.next = null;
           this.#tail = prevNode;
           break;
         }
 
-        // remove in between head and tail nodes
+        // Remove in between head and tail nodes
         prevNode.next = currentNode.next;
         break;
       }
@@ -170,7 +171,7 @@ class List {
     }
 
     this.length--;
-    return this.values;
+    return this.values();
   }
 
   values() {
@@ -178,13 +179,10 @@ class List {
     let nextList = this.#head;
 
     // Add values till next is null
-    while (nextList.next) {
+    while (nextList) {
       listItem.push(nextList.value);
       nextList = nextList.next;
     }
-
-    // Add tail item to the collection
-    listItem.push(this.#tail.value);
 
     return listItem;
   }
@@ -196,11 +194,10 @@ class List {
     };
   }
 
-  #initList(value, newNode) {
+  #initList(newNode) {
     this.#head = newNode.head;
-
-    this.#tail = this.#head;
-    this.length = value ? 1 : 0;
+    this.#tail = newNode.head;
+    this.length = 1;
   }
 }
 
@@ -213,15 +210,15 @@ list.prepend(5);
 list.prepend(-1);
 list.prepend(5);
 
-// console.log(list.lookup(4));
+console.log(list.lookup(4));
 
 list.insert(2, 20);
 list.insert(6, 114);
 console.log(list.values(), list.length);
 // console.log(list.showList());
 list.delete(9);
-// list.delete(6);
-// list.deleteByValue(5);
+list.delete(6);
+list.deleteByValue(5);
 // list.deleteByValue(5);
 
 console.log(list.values(), list.length);
