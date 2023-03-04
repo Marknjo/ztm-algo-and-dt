@@ -51,6 +51,26 @@ class DoublyList {
     this.length++;
   }
 
+  lookup(index) {
+    if (index > this.length - 1 || index < 0) {
+      return undefined;
+    }
+
+    /// Limit transversal for:
+    // First Item
+    if (index === 0) {
+      return this.#head.value;
+    }
+
+    // & Last item
+    if (index === this.length - 1) {
+      return this.#tail.value;
+    }
+
+    /// Find between head & tail
+    return this.#transverse(index);
+  }
+
   values() {
     let currentNode = this.#head;
     const listValues = [];
@@ -68,7 +88,23 @@ class DoublyList {
   #initNode(value, newNode) {
     this.#head = newNode;
     this.#tail = newNode;
-    this.length = value || 0;
+    this.length = value ? 1 : 0;
+  }
+
+  #transverse(index) {
+    let countIdx = 0;
+    let currentNode = this.#head;
+
+    while (currentNode.next) {
+      if (countIdx === index) {
+        return currentNode.value;
+      }
+
+      currentNode = currentNode.next;
+      countIdx++;
+    }
+
+    return undefined;
   }
 }
 
@@ -81,4 +117,6 @@ doubly.append(20);
 doubly.append("Happy");
 doubly.append(30);
 
-console.log(doubly.values());
+console.log(doubly.lookup(1));
+
+console.log(doubly.values(), " Length: ", doubly.length);
