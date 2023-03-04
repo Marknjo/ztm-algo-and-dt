@@ -1,12 +1,8 @@
 class Node {
-  head = {};
-
   constructor(value) {
-    this.head = {
-      value: value || null,
-      next: null,
-      prev: null,
-    };
+    this.value = value || null;
+    this.next = null;
+    this.prev = null;
   }
 }
 
@@ -18,6 +14,26 @@ class DoublyList {
   constructor(value) {
     const newNode = new Node(value);
     this.#initNode(value, newNode);
+  }
+
+  prepend(value) {
+    const newNode = new Node(value);
+
+    // Check if list was initialized with a value;
+    if (!this.#head.value) {
+      console.log("entered", this.#head);
+
+      this.#initNode(value, newNode);
+      return this.values();
+    }
+
+    /// add a new node
+    this.#head.prev = { ...newNode };
+    newNode.next = this.#head;
+
+    this.#head = newNode;
+
+    this.length++;
   }
 
   values() {
@@ -36,11 +52,13 @@ class DoublyList {
 
   #initNode(value, newNode) {
     this.#head = newNode;
-    this.#tail = newNode.head;
+    this.#tail = newNode;
     this.length = value || 0;
   }
 }
 
-const doubly = new DoublyList();
+const doubly = new DoublyList(16);
+
+doubly.prepend(2);
 
 console.log(doubly.values());
