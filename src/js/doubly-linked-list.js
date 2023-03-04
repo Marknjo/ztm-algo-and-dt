@@ -68,7 +68,49 @@ class DoublyList {
     }
 
     /// Find between head & tail
-    return this.#transverse(index);
+    const foundNode = this.#transverse(index);
+    return foundNode ? foundNode.value : foundNode;
+  }
+
+  delete(index) {
+    if (index > this.length - 1 || index < 0) {
+      return undefined;
+    }
+
+    /// Limit transversal for:
+    // First Item
+    if (index === 0) {
+      this.#head = this.#head.next;
+      this.#head.prev = null;
+      this.length--;
+      return this.values();
+    }
+
+    // & Last item
+    if (index === this.length - 1) {
+      this.#tail = this.#tail.prev;
+      this.#tail.next = null;
+      this.length--;
+
+      return this.values();
+    }
+
+    /// Find between head & tail
+    const deleteNode = this.#transverse(index);
+
+    // Could not find the node
+    if (!deleteNode) return deleteNode;
+
+    /// Disconnect the node from the link
+    const prevNode = deleteNode.prev;
+    const nextNode = deleteNode.next;
+
+    prevNode.next = nextNode;
+    nextNode.prev = prevNode;
+    this.length--;
+
+    // Return deleted node
+    return deleteNode;
   }
 
   values() {
@@ -97,7 +139,7 @@ class DoublyList {
 
     while (currentNode.next) {
       if (countIdx === index) {
-        return currentNode.value;
+        return currentNode;
       }
 
       currentNode = currentNode.next;
@@ -117,6 +159,8 @@ doubly.append(20);
 doubly.append("Happy");
 doubly.append(30);
 
-console.log(doubly.lookup(1));
+console.log(doubly.lookup(6));
+
+console.log(doubly.delete(5));
 
 console.log(doubly.values(), " Length: ", doubly.length);
