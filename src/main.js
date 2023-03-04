@@ -4,7 +4,8 @@ import "./fouc-fix/fouc-fix";
 /* Other Scripts Here */
 // import "./js/custom-array";
 // import "./js/hash-table";
-import "./js/liked-list";
+// import "./js/liked-list";
+import "./js/doubly-linked-list";
 
 /* Default text */
 document.querySelector("#app").innerHTML = `
