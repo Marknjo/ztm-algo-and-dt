@@ -16,19 +16,34 @@ class DoublyList {
     this.#initNode(value, newNode);
   }
 
+  append(value) {
+    const newNode = new Node(value);
+
+    // no initial value
+    if (!this.#head.value) {
+      this.#initNode(value, newNode);
+      return this.values();
+    }
+
+    /// Append
+    this.#tail.next = newNode;
+    newNode.prev = this.#tail;
+
+    this.#tail = newNode;
+    this.length++;
+  }
+
   prepend(value) {
     const newNode = new Node(value);
 
     // Check if list was initialized with a value;
     if (!this.#head.value) {
-      console.log("entered", this.#head);
-
       this.#initNode(value, newNode);
       return this.values();
     }
 
     /// add a new node
-    this.#head.prev = { ...newNode };
+    this.#head.prev = newNode;
     newNode.next = this.#head;
 
     this.#head = newNode;
@@ -60,5 +75,10 @@ class DoublyList {
 const doubly = new DoublyList(16);
 
 doubly.prepend(2);
+doubly.prepend(5);
+doubly.prepend(15);
+doubly.append(20);
+doubly.append("Happy");
+doubly.append(30);
 
 console.log(doubly.values());
