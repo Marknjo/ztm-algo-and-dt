@@ -31,6 +31,8 @@ class DoublyList {
 
     this.#tail = newNode;
     this.length++;
+
+    return this.values();
   }
 
   prepend(value) {
@@ -49,6 +51,7 @@ class DoublyList {
     this.#head = newNode;
 
     this.length++;
+    return this.values();
   }
 
   lookup(index) {
@@ -70,6 +73,35 @@ class DoublyList {
     /// Find between head & tail
     const foundNode = this.#transverse(index);
     return foundNode ? foundNode.value : foundNode;
+  }
+
+  insert(index, value) {
+    if (index > this.length - 1 || index < 0) {
+      return undefined;
+    }
+
+    /// Limit transversal for:
+    // First Item
+    if (index === 0) {
+      return this.prepend(value);
+    }
+
+    // & Last item
+    if (index === this.length - 1) {
+      return this.append(value);
+    }
+
+    /// Find between head & tail
+    const insertPosNode = this.#transverse(index);
+
+    const newNode = new Node(value);
+    // Swap nodes
+    newNode.prev = insertPosNode.prev;
+    newNode.next = insertPosNode;
+    insertPosNode.prev.next = newNode;
+    this.length++;
+
+    return this.values();
   }
 
   delete(index) {
@@ -161,6 +193,8 @@ doubly.append(30);
 
 console.log(doubly.lookup(6));
 
-console.log(doubly.delete(5));
+// console.log(doubly.delete(5));
+console.log(doubly.values(), " Length: ", doubly.length);
+console.log(doubly.insert(3, 1));
 
 console.log(doubly.values(), " Length: ", doubly.length);
