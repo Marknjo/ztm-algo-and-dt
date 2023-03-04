@@ -145,6 +145,35 @@ class DoublyList {
     return deleteNode;
   }
 
+  reverse() {
+    if (this.length === 0 || this.length === 1) {
+      return this.values();
+    }
+
+    /// Reverse
+    let firstLink = this.#head;
+    this.#tail = firstLink;
+
+    let currentLink = firstLink.next;
+
+    while (currentLink) {
+      /// Prep next link
+      let nextLink = currentLink.next;
+
+      currentLink.prev = nextLink;
+      currentLink.next = firstLink;
+
+      firstLink = currentLink;
+      currentLink = nextLink;
+    }
+
+    this.#head = firstLink;
+    this.#head.prev = null;
+    this.#tail.next = null;
+
+    return this.values();
+  }
+
   values() {
     let currentNode = this.#head;
     const listValues = [];
@@ -194,7 +223,10 @@ doubly.append(30);
 console.log(doubly.lookup(6));
 
 // console.log(doubly.delete(5));
-console.log(doubly.values(), " Length: ", doubly.length);
-console.log(doubly.insert(3, 1));
+// console.log(doubly.values(), " Length: ", doubly.length);
+// console.log(doubly.insert(3, 1));
+doubly.insert(3, 1);
 
 console.log(doubly.values(), " Length: ", doubly.length);
+
+console.log(doubly.reverse());
