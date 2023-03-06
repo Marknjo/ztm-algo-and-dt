@@ -33,7 +33,18 @@ class Stack {
 
     return this;
   }
-  // pop(){}
+
+  pop() {
+    if (this.length === 0) {
+      return null;
+    }
+
+    let nextTop = this.#top.next;
+    this.top = nextTop;
+
+    this.length--;
+    return nextTop;
+  }
 }
 
 const stack = new Stack();
@@ -45,5 +56,8 @@ stack.push("ReactJs");
 const addValue5 = stack.push("Keystone");
 
 console.log(addValue5);
+
+console.log(stack.pop(), stack);
+
 let firstItem = stack.peek();
 console.log({ firstItem: firstItem.value });
