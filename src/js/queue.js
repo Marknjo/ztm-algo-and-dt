@@ -13,7 +13,9 @@ class Queue {
   #bottom = 0;
   length = 0;
 
-  peek() {}
+  peek() {
+    return this.#top;
+  }
 
   enqueue(value) {}
 
