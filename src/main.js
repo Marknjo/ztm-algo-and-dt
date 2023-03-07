@@ -8,7 +8,8 @@ import "./fouc-fix/fouc-fix";
 // import "./js/doubly-linked-list";
 // import "./js/stack";
 // import "./js/stacks-with-arrays";
-import "./js/queue";
+// import "./js/queue";
+import "./js/queues-with-stacks";
 
 /* Default text */
 document.querySelector("#app").innerHTML = `
