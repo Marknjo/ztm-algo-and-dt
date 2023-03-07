@@ -1,6 +1,7 @@
 class Node {
   value;
   next;
+  prev;
 
   constructor(value) {
     this.value = value;
@@ -32,10 +33,9 @@ class Queue {
       return this;
     }
 
-    let currentBottom = this.#last;
+    this.#last.next = newNode;
+    newNode.prev = this.#last;
     this.#last = newNode;
-    this.#last.next = currentBottom;
-    this.#last.next.prev = this.#last;
 
     this.length++;
 
@@ -44,7 +44,7 @@ class Queue {
 
   dequeue() {
     if (this.length === 0) {
-      return undefined;
+      return null;
     }
 
     if (this.length === 1) {
@@ -54,8 +54,8 @@ class Queue {
       return this;
     }
 
-    this.#first = this.#first.prev;
-    this.#first.next = null;
+    this.#first.next.prev = null;
+    this.#first = this.#first.next;
 
     this.length--;
     return this;
