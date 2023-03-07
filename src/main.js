@@ -7,7 +7,8 @@ import "./fouc-fix/fouc-fix";
 // import "./js/liked-list";
 // import "./js/doubly-linked-list";
 // import "./js/stack";
-import "./js/stacks-with-arrays";
+// import "./js/stacks-with-arrays";
+import "./js/queue";
 
 /* Default text */
 document.querySelector("#app").innerHTML = `
