@@ -13,29 +13,29 @@ class Node {
  * Implemented Queues using Doubly links
  */
 class Queue {
-  #top = null;
-  #bottom = null;
+  #first = null;
+  #last = null;
   length = 0;
 
   peek() {
-    return this.#top;
+    return this.#first;
   }
 
   enqueue(value) {
     const newNode = new Node(value);
 
     if (this.length === 0) {
-      this.#top = newNode;
-      this.#bottom = newNode;
+      this.#first = newNode;
+      this.#last = newNode;
 
       this.length++;
       return this;
     }
 
-    let currentBottom = this.#bottom;
-    this.#bottom = newNode;
-    this.#bottom.next = currentBottom;
-    this.#bottom.next.prev = this.#bottom;
+    let currentBottom = this.#last;
+    this.#last = newNode;
+    this.#last.next = currentBottom;
+    this.#last.next.prev = this.#last;
 
     this.length++;
 
@@ -47,10 +47,18 @@ class Queue {
       return undefined;
     }
 
-    this.#top = this.#top.prev;
-    this.#top.next = null;
+    if (this.length === 1) {
+      this.#first = null;
+      this.#last = null;
+      this.length--;
+      return this;
+    }
+
+    this.#first = this.#first.prev;
+    this.#first.next = null;
 
     this.length--;
+    return this;
   }
 }
 
@@ -82,6 +90,13 @@ console.log(queue.peek()); // Expects Ella
 queue.dequeue();
 console.log(queue.peek()); // Expects Rachel
 
+queue.dequeue();
+queue.dequeue();
+queue.dequeue();
+queue.dequeue();
+queue.dequeue();
+queue.dequeue();
+queue.dequeue();
 queue.dequeue();
 console.log(queue.peek()); // Expects Ethan
 
