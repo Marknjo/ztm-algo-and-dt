@@ -47,7 +47,31 @@ class BinarySearchTree {
     }
   }
 
-  lookup(value) {}
+  lookup(value) {
+    if (!this.#root) {
+      return null;
+    }
+
+    let currentNode = this.#root;
+
+    while (currentNode) {
+      /// Exit if we have a match
+      if (currentNode.value === value) {
+        return currentNode;
+      }
+
+      // Keep looking till a match is found
+      // Look to the left
+      if (value < currentNode.value) {
+        currentNode = currentNode.left;
+      }
+
+      // Look to the right
+      if (value > currentNode.value) {
+        currentNode = currentNode.right;
+      }
+    }
+  }
 
   remove(value) {}
 
@@ -94,3 +118,7 @@ function traverse(node) {
 const previewTree = traverse(tree.parentNode);
 
 console.log(previewTree);
+
+/// Lookup Test
+console.log("\n\n-------------------------LOOKUP-------------------------\n");
+console.table(tree.lookup(15));
