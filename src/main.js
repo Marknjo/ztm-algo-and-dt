@@ -9,7 +9,8 @@ import "./fouc-fix/fouc-fix";
 // import "./js/stack";
 // import "./js/stacks-with-arrays";
 // import "./js/queue";
-import "./js/queues-with-stacks";
+// import "./js/queues-with-stacks";
+import "./js/binary-search-tree";
 
 /* Default text */
 document.querySelector("#app").innerHTML = `
