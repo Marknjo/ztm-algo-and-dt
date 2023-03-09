@@ -16,7 +16,10 @@ import "./fouc-fix/fouc-fix";
 /// Algorithms
 // import "./js/recursion";
 // import "./js/recursion-factorial";
-import "./js/recursion-fib";
+// import "./js/recursion-fib";
+
+/// Coding challenges
+import "./js/coding-challenges-03-09";
 
 /* Default text */
 document.querySelector("#app").innerHTML = `
