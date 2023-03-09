@@ -2,9 +2,10 @@ class Graph {
   numberOfNodes = 0;
   adjacentList = new Map();
 
-  addVertex(node) {}
-
-  addEdge(node1, node2) {}
+  addVertex(node) {
+    this.adjacentList.set(node, []);
+    return this;
+  }
 
   showConnections() {
     const allNodes = [...this.adjacentList.keys()];
@@ -36,6 +37,9 @@ myGraph.addVertex("3");
 myGraph.addVertex("4");
 myGraph.addVertex("5");
 myGraph.addVertex("6");
+
+console.log(myGraph);
+
 console.log("Added 7 Vertex");
 
 console.log(
@@ -50,3 +54,4 @@ myGraph.addEdge("1", "0");
 myGraph.addEdge("0", "2");
 myGraph.addEdge("6", "5");
 console.log("Added all edges");
+myGraph.showConnections();
