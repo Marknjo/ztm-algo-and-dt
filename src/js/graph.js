@@ -29,20 +29,6 @@ class Graph {
   }
 
   showConnections() {
-    // const allNodes = [...this.adjacentList.keys()];
-
-    // allNodes.forEach((node) => {
-    //   let nodeConnections = this.adjacentList.get(node);
-    //   let connections = "";
-    //   let vertex;
-
-    //   for (vertex of nodeConnections) {
-    //     connections += vertex + " ";
-    //   }
-
-    //   console.log(node + "-->" + connections);
-    // });
-
     this.adjacentList.forEach((value, key) => {
       console.log(`${key} --> ${value.join(" ")}`);
     });
