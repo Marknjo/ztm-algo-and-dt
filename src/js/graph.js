@@ -7,6 +7,27 @@ class Graph {
     return this;
   }
 
+  addEdge(node1, node2) {
+    try {
+      let hasNode1 = this.adjacentList.get(node1);
+      let hasNode2 = this.adjacentList.get(node2);
+
+      if (!hasNode1 || !hasNode2) {
+        throw Error(
+          "Reference Error: Node 1 value or Node 2 value not in the graph"
+        );
+      }
+
+      // There are nodes in the graph
+      hasNode1.push(node2);
+      hasNode2.push(node1);
+
+      return this;
+    } catch (error) {
+      console.error(error.message);
+    }
+  }
+
   showConnections() {
     const allNodes = [...this.adjacentList.keys()];
 
