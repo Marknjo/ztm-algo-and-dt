@@ -10,7 +10,8 @@ import "./fouc-fix/fouc-fix";
 // import "./js/stacks-with-arrays";
 // import "./js/queue";
 // import "./js/queues-with-stacks";
-import "./js/binary-search-tree";
+// import "./js/binary-search-tree";
+import "./js/graph";
 
 /* Default text */
 document.querySelector("#app").innerHTML = `
