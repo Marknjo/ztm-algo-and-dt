@@ -11,7 +11,10 @@ import "./fouc-fix/fouc-fix";
 // import "./js/queue";
 // import "./js/queues-with-stacks";
 // import "./js/binary-search-tree";
-import "./js/graph";
+// import "./js/graph";
+
+/// Algorithms
+import "./js/recursion";
 
 /* Default text */
 document.querySelector("#app").innerHTML = `
