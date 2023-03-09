@@ -14,7 +14,8 @@ import "./fouc-fix/fouc-fix";
 // import "./js/graph";
 
 /// Algorithms
-import "./js/recursion";
+// import "./js/recursion";
+import "./js/recursion-factorial";
 
 /* Default text */
 document.querySelector("#app").innerHTML = `
