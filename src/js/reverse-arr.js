@@ -34,4 +34,7 @@ function reverse(arr) {
   }
 }
 
-console.log(reverse(names));
+console.log(names);
+// console.log(names.sort());
+reverse(names);
+console.log(names);

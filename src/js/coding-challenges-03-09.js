@@ -85,10 +85,11 @@ var lengthOfLongestSubstring = function (s) {
 
   // Best CPU
   // CPU -> 93.93% (77ms), M -> 63.76% 47mb
+  debugger;
   let pred = "";
   let curr = "";
   for (let a of s) {
-    index = curr.indexOf(a);
+    let index = curr.indexOf(a);
     if (index !== -1) {
       if (curr.length > pred.length) {
         pred = curr;
@@ -100,11 +101,11 @@ var lengthOfLongestSubstring = function (s) {
 };
 
 console.log(lengthOfLongestSubstring("ggububgvfk"));
-console.log(lengthOfLongestSubstring("loddktdji"));
-console.log(lengthOfLongestSubstring("anviaj"));
-console.log(lengthOfLongestSubstring("dvdf"));
-console.log(lengthOfLongestSubstring("pwwkew"));
-console.log(lengthOfLongestSubstring("bbbbb"));
-console.log(lengthOfLongestSubstring("abcabcbb"));
-console.log(lengthOfLongestSubstring(""));
-console.log(lengthOfLongestSubstring("a"));
+// console.log(lengthOfLongestSubstring("loddktdji"));
+// console.log(lengthOfLongestSubstring("anviaj"));
+// console.log(lengthOfLongestSubstring("dvdf"));
+// console.log(lengthOfLongestSubstring("pwwkew"));
+// console.log(lengthOfLongestSubstring("bbbbb"));
+// console.log(lengthOfLongestSubstring("abcabcbb"));
+// console.log(lengthOfLongestSubstring(""));
+// console.log(lengthOfLongestSubstring("a"));

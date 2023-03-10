@@ -19,7 +19,9 @@ import "./fouc-fix/fouc-fix";
 // import "./js/recursion-fib";
 
 /// Coding challenges
-import "./js/coding-challenges-03-09";
+// import "./js/coding-challenges-03-09";
+// import "./js/reverse-arr";
+import "./js/coding-challenges-03-10";
 
 /* Default text */
 document.querySelector("#app").innerHTML = `
