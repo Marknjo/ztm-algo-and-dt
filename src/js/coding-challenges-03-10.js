@@ -68,16 +68,31 @@ const removeDuplicates = function (nums) {
   return prevIdx + 1;
 };
 
-const test1Nums = [0, 0, 1, 1, 1, 2, 2, 3, 3, 4];
-const testNums = [0, 1, 2, 3, 4, "|", 2, 2, 3, 3, 4];
-const test2Nums = [0, 1, 2, 3, 4, "_", "_", "_", "_", "_"];
+// const test1Nums = [0, 0, 1, 1, 1, 2, 2, 3, 3, 4];
+// const testNums = [0, 1, 2, 3, 4, "|", 2, 2, 3, 3, 4];
+// const test2Nums = [0, 1, 2, 3, 4, "_", "_", "_", "_", "_"];
 
-let test1 = removeDuplicates(test1Nums); // expects 5
-// let test2 = removeDuplicates(test2Nums); // expects 5
+// let test1 = removeDuplicates(test1Nums); // expects 5
+// // let test2 = removeDuplicates(test2Nums); // expects 5
 
-console.log(test1, test1Nums);
+// console.log(test1, test1Nums);
 
 // console.table({
 //   test1: { results: test1, test: test1 === 5 },
 //   text2: { results: test2, test: test2 === 5 },
 // });
+
+let digits1 = "1234";
+let digits2 = "12341";
+
+function optimizeDigits(digit, n) {
+  for (let i = 0; i < digit.length; i++) {
+    if (digit[i] === n) {
+      return digit.slice(0, i) + digit.slice(i + 1);
+    }
+  }
+}
+
+console.log(optimizeDigits(digits1, "1"));
+console.log(optimizeDigits(digits2, "1"));
+// console.log(digits1, "1");
