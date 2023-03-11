@@ -17,11 +17,12 @@ import "./fouc-fix/fouc-fix";
 // import "./js/recursion";
 // import "./js/recursion-factorial";
 // import "./js/recursion-fib";
+import "./js/sorting";
 
 /// Coding challenges
 // import "./js/coding-challenges-03-09";
 // import "./js/reverse-arr";
-import "./js/coding-challenges-03-10";
+// import "./js/coding-challenges-03-10";
 
 /* Default text */
 document.querySelector("#app").innerHTML = `
