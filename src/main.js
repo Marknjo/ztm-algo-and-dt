@@ -18,6 +18,9 @@ import "./fouc-fix/fouc-fix";
 // import "./js/recursion-factorial";
 // import "./js/recursion-fib";
 import "./js/sorting";
+import "./js/sorting-bubble";
+import "./js/sorting-selection";
+import "./js/sorting-insertion";
 
 /// Coding challenges
 // import "./js/coding-challenges-03-09";
