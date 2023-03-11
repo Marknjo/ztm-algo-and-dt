@@ -21,6 +21,7 @@ import "./js/sorting";
 import "./js/sorting-bubble";
 import "./js/sorting-selection";
 import "./js/sorting-insertion";
+import "./js/sorting-merge-sort";
 
 /// Coding challenges
 // import "./js/coding-challenges-03-09";
