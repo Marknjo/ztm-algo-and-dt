@@ -30,7 +30,8 @@ import "./fouc-fix/fouc-fix";
 // import "./js/reverse-arr";
 // import "./js/coding-challenges-03-10";
 // import "./js/coding-challenges-03-11";
-import "./js/coding-challenges-03-13";
+// import "./js/coding-challenges-03-13";
+import "./js/coding-challenges-03-13-02";
 
 /* Default text */
 document.querySelector("#app").innerHTML = `
