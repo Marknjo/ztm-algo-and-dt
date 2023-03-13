@@ -17,16 +17,19 @@ import "./fouc-fix/fouc-fix";
 // import "./js/recursion";
 // import "./js/recursion-factorial";
 // import "./js/recursion-fib";
-import "./js/sorting";
-import "./js/sorting-bubble";
-import "./js/sorting-selection";
-import "./js/sorting-insertion";
-import "./js/sorting-merge-sort";
+
+/// Sorting
+// import "./js/sorting";
+// import "./js/sorting-bubble";
+// import "./js/sorting-selection";
+// import "./js/sorting-insertion";
+// import "./js/sorting-merge-sort";
 
 /// Coding challenges
 // import "./js/coding-challenges-03-09";
 // import "./js/reverse-arr";
 // import "./js/coding-challenges-03-10";
+import "./js/coding-challenges-03-11";
 
 /* Default text */
 document.querySelector("#app").innerHTML = `
