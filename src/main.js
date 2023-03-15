@@ -18,7 +18,7 @@ import "./fouc-fix/fouc-fix";
 // import "./js/recursion-factorial";
 // import "./js/recursion-fib";
 // import "./js/binary-BFS";
-import "./js/binary-DFS";
+// import "./js/binary-DFS";
 
 /// Sorting
 // import "./js/sorting";
@@ -35,6 +35,7 @@ import "./js/binary-DFS";
 // import "./js/coding-challenges-03-13";
 // import "./js/coding-challenges-03-13-02";
 // import "./js/coding-challenges-03-14";
+import "./js/coding-challenges-03-15";
 
 /* Default text */
 document.querySelector("#app").innerHTML = `
