@@ -198,3 +198,48 @@ console.log({ exp9Values, test9V2 });
 console.log({ exp10Values, test10V2 });
 console.log({ exp11Values, test11V2 });
 console.log({ exp12Values, test12V2 });
+
+console.log(
+  `\n\n-------------------Solution CASE V3 (ChatGPT)------------------`
+);
+
+function validParenthesesV3(s) {
+  let stack = [];
+  for (let i = 0; i < s.length; i++) {
+    if (s[i] === "(" || s[i] === "{" || s[i] === "[") {
+      stack.push(s[i]);
+    } else {
+      let last = stack.pop();
+      if (s[i] === ")" && last !== "(") return false;
+      if (s[i] === "}" && last !== "{") return false;
+      if (s[i] === "]" && last !== "[") return false;
+    }
+  }
+  return stack.length === 0;
+}
+
+let test1V3 = validParenthesesV3(exp1Values);
+let test2V3 = validParenthesesV3(exp2Values);
+let test3V3 = validParenthesesV3(exp3Values);
+let test4V3 = validParenthesesV3(exp4Values);
+let test5V3 = validParenthesesV3(exp5Values);
+let test6V3 = validParenthesesV3(exp6Values);
+let test7V3 = validParenthesesV3(exp7Values);
+let test8V3 = validParenthesesV3(exp8Values);
+let test9V3 = validParenthesesV3(exp9Values);
+let test10V3 = validParenthesesV3(exp10Values);
+let test11V3 = validParenthesesV3(exp11Values);
+let test12V3 = validParenthesesV3(exp12Values);
+
+console.log({ exp1Values, test1V3 });
+console.log({ exp2Values, test2V3 });
+console.log({ exp3Values, test3V3 });
+console.log({ exp4Values, test4V3 });
+console.log({ exp5Values, test5V3 });
+console.log({ exp6Values, test6V3 });
+console.log({ exp7Values, test7V3 });
+console.log({ exp8Values, test8V3 });
+console.log({ exp9Values, test9V3 });
+console.log({ exp10Values, test10V3 });
+console.log({ exp11Values, test11V3 });
+console.log({ exp12Values, test12V3 });
