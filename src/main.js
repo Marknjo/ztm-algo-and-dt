@@ -36,7 +36,8 @@ import "./fouc-fix/fouc-fix";
 // import "./js/coding-challenges-03-13-02";
 // import "./js/coding-challenges-03-14";
 // import "./js/coding-challenges-03-15";
-import "./js/coding-challenges-03-19";
+// import "./js/coding-challenges-03-19";
+import "./js/coding-challenges-03-22";
 
 /* Default text */
 document.querySelector("#app").innerHTML = `
