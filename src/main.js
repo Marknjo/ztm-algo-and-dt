@@ -4,8 +4,8 @@ import "./fouc-fix/fouc-fix";
 /* Other Scripts Here */
 // import "./js/custom-array";
 // import "./js/hash-table";
-// import "./js/liked-list";
-// import "./js/doubly-linked-list";
+// import "./js/list-linked";
+// import "./js/list-doubly";
 // import "./js/stack";
 // import "./js/stacks-with-arrays";
 // import "./js/queue";
@@ -37,7 +37,7 @@ import "./fouc-fix/fouc-fix";
 // import "./js/coding-challenges-03-14";
 // import "./js/coding-challenges-03-15";
 // import "./js/coding-challenges-03-19";
-import "./js/coding-challenges-03-22";
+// import "./js/coding-challenges-03-22";
 
 /* Default text */
 document.querySelector("#app").innerHTML = `
