@@ -6,6 +6,7 @@ import "./fouc-fix/fouc-fix";
 // import "./js/hash-table";
 // import "./js/list-linked";
 // import "./js/list-doubly";
+import "./js/list-singly";
 // import "./js/stack";
 // import "./js/stacks-with-arrays";
 // import "./js/queue";
