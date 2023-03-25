@@ -64,6 +64,30 @@ class DoublyList {
     return poppedNode;
   }
 
+  shift() {
+    // has no node
+    if (!this.#head) return undefined;
+
+    // has only one node
+    if (this.length === 1) {
+      let poppedNode = this.#head;
+      this.#head = null;
+      this.#tail = null;
+      this.length--;
+      return poppedNode;
+    }
+
+    // has more than one node
+    const poppedNode = this.#head;
+    this.#head = poppedNode.next;
+    this.#head.prev = null;
+    poppedNode.next = null;
+
+    this.length--;
+
+    return poppedNode;
+  }
+
   printList() {
     if (!this.#head) {
       return [];
@@ -93,6 +117,9 @@ console.log("--------------PUSH METHOD--------------");
 
 /// 100, 200, 300, 600, 700, 800, 999
 list
+  .push(-300)
+  .push(-200)
+  .push(-100)
   .push(100)
   .push(200)
   .push(300)
@@ -111,6 +138,14 @@ console.log("\n\n--------------POP METHOD--------------");
 
 console.log(list.pop());
 console.log(list.pop());
+console.log(list);
+
+console.log(list.printList());
+
+console.log("\n\n--------------SHIFT METHOD--------------");
+console.log(list.shift());
+console.log(list.shift());
+console.log(list.shift());
 console.log(list);
 
 console.log(list.printList());
