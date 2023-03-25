@@ -48,6 +48,19 @@ class DoublyList {
     return foundNode || null;
   }
 
+  set(index, value) {
+    // value | index is empty
+    let foundNode = this.get(index);
+
+    if (value === "" || typeof value === "undefined" || !foundNode)
+      return false;
+
+    // nodeFound
+    foundNode.val = value;
+
+    return true;
+  }
+
   push(value) {
     if (value === "" || typeof value === "undefined") return undefined;
 
@@ -246,6 +259,14 @@ console.log("\n\n--------------GET METHOD--------------");
 console.log(list.get(6)); // Expects: 500
 console.log(list.get(2)); // Expects: 100
 console.log(list.get(-1)); // Expects: 700
+
+console.log(list);
+
+console.log(list.printList());
+
+console.log("\n\n--------------SET METHOD--------------");
+console.log(list.set(0, 30));
+console.log(list.set(6, 550));
 
 console.log(list);
 
