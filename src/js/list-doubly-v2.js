@@ -11,6 +11,43 @@ class DoublyList {
   #tail = null;
   length = 0;
 
+  get(index) {
+    // case no value/index
+    if (index === "" || typeof index === "undefined") return undefined;
+
+    // case index is less than 0 or greater than length
+    // @TODO: these two cases warrant throwing errors - invalid index
+    if (index < -1 || index > this.length) return undefined;
+
+    // Is valid index
+
+    // case index is 0
+    if (index === 0) return this.#head;
+
+    // case index is equal to length
+    if (index === this.length || index === -1) return this.#tail;
+
+    // case how to traverse the list
+    const listMidLen = Math.floor(this.length / 2);
+    let foundNode;
+
+    // traverse
+    switch (true) {
+      // traverse from tail - index near tail | index > listMidLen
+      case index > listMidLen:
+        foundNode = this.#reverseTraverse(index);
+        break;
+
+      // traverse from head - index near head | index < listMidLen
+      // is half the list - find default
+      default:
+        foundNode = this.#forwardTraverse(index);
+        break;
+    }
+
+    return foundNode || null;
+  }
+
   push(value) {
     if (value === "" || typeof value === "undefined") return undefined;
 
@@ -128,6 +165,34 @@ class DoublyList {
 
     return list;
   }
+
+  #reverseTraverse(index) {
+    let current = this.#tail;
+    let count = this.length - 1;
+
+    while (current.prev) {
+      if (index === count) {
+        return current;
+      }
+      count--;
+      current = current.prev;
+    }
+    return false;
+  }
+
+  #forwardTraverse(index) {
+    let current = this.#head;
+    let count = 0;
+
+    while (current.next) {
+      if (index === count) {
+        return current;
+      }
+      count++;
+      current = current.next;
+    }
+    return false;
+  }
 }
 
 const list = new DoublyList();
@@ -171,6 +236,16 @@ console.log(list.printList());
 
 console.log("\n\n--------------UNSHIFT METHOD--------------");
 list.unshift(50).unshift(25);
+
+console.log(list);
+
+console.log(list.printList());
+
+console.log("\n\n--------------GET METHOD--------------");
+
+console.log(list.get(6)); // Expects: 500
+console.log(list.get(2)); // Expects: 100
+console.log(list.get(-1)); // Expects: 700
 
 console.log(list);
 
