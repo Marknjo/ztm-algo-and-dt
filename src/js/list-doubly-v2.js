@@ -12,11 +12,7 @@ class DoublyList {
   length = 0;
 
   push(value) {
-    if (value === "" || typeof value === "undefined") {
-      console.log("entered");
-
-      return undefined;
-    }
+    if (value === "" || typeof value === "undefined") return undefined;
 
     const newNode = new Node(value);
     this.length++;
@@ -62,6 +58,29 @@ class DoublyList {
     this.length--;
 
     return poppedNode;
+  }
+
+  unshift(value) {
+    // no value supplied
+    if (value === "" || typeof value === "undefined") return undefined;
+
+    // value is not empty
+    let newNode = new Node(value);
+    this.length++;
+
+    // first time
+    if (!this.#head) {
+      this.#head = newNode;
+      this.#tail = newNode;
+
+      return this;
+    }
+
+    // there are nodes in the list
+    this.#head.prev = newNode;
+    newNode.next = this.#head;
+    this.#head = newNode;
+    return this;
   }
 
   shift() {
@@ -146,6 +165,13 @@ console.log("\n\n--------------SHIFT METHOD--------------");
 console.log(list.shift());
 console.log(list.shift());
 console.log(list.shift());
+console.log(list);
+
+console.log(list.printList());
+
+console.log("\n\n--------------UNSHIFT METHOD--------------");
+list.unshift(50).unshift(25);
+
 console.log(list);
 
 console.log(list.printList());
