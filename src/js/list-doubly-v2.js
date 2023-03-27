@@ -50,13 +50,19 @@ class DoublyList {
 
   insert(index, value) {
     // value | index is empty
-    if (value === "" || typeof value === "undefined") return undefined;
+    if (
+      value === "" ||
+      typeof value === "undefined" ||
+      index < 0 ||
+      index > this.length
+    )
+      return undefined;
 
     // index === 0
-    if (index === 0) !!this.unshift(value);
+    if (index === 0) return !!this.unshift(value);
 
     // index === this.length
-    if (index === this.length) !!this.push(value);
+    if (index === this.length) return !!this.push(value);
 
     // index > 0 && index < this.length
     let nodeAtIndex = this.get(index);
@@ -181,6 +187,40 @@ class DoublyList {
     return poppedNode;
   }
 
+  remove(index) {
+    // value | index is empty
+    if (
+      index === "" ||
+      typeof index === "undefined" ||
+      index < 0 ||
+      index >= this.length
+    )
+      return undefined;
+
+    // when null
+    if (!this.#head) return undefined;
+
+    // index === 0
+    if (index === 0) return this.shift();
+
+    // index === this.length
+    if (index === this.length - 1) return this.pop();
+
+    // index > 0 && index < this.length
+    let nodeAtIndex = this.get(index);
+    let nodeBeforeIndex = nodeAtIndex.prev;
+    let nodeAfterIndex = nodeAtIndex.next;
+
+    // remove node at index from flow
+    nodeBeforeIndex.next = nodeAfterIndex;
+    nodeAfterIndex.prev = nodeBeforeIndex;
+    this.length--;
+
+    nodeAtIndex.prev = null;
+    nodeAtIndex.next = null;
+    return nodeAtIndex;
+  }
+
   printList() {
     if (!this.#head) {
       return [];
@@ -300,5 +340,15 @@ console.log("\n\n--------------INSERT METHOD--------------");
 
 console.log(list.insert(4, 250));
 console.log(list.insert(7, 500));
+
+console.log(list.printList());
+
+console.log("\n\n--------------REMOVE METHOD--------------");
+
+console.log(list.remove(4));
+console.log(list.remove(7));
+console.log(list.remove());
+
+console.log(list);
 
 console.log(list.printList());
