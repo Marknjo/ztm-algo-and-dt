@@ -221,6 +221,29 @@ class DoublyList {
     return nodeAtIndex;
   }
 
+  reverse() {
+    if (!this.#head || this.length === 1) return this;
+
+    let headNode = this.#head;
+    this.#tail = headNode;
+
+    let current = headNode.next;
+    while (current) {
+      let temp = current.next;
+      current.prev = temp;
+      current.next = headNode;
+
+      headNode = current;
+      current = temp;
+    }
+
+    this.#head = headNode;
+    this.#head.prev = null;
+    this.#tail.next = null;
+
+    return this;
+  }
+
   printList() {
     if (!this.#head) {
       return [];
@@ -350,5 +373,10 @@ console.log(list.remove(7));
 console.log(list.remove());
 
 console.log(list);
+
+console.log(list.printList());
+
+console.log("\n\n--------------REVERSE METHOD--------------");
+console.log(list.reverse());
 
 console.log(list.printList());
