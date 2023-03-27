@@ -48,6 +48,30 @@ class DoublyList {
     return foundNode || null;
   }
 
+  insert(index, value) {
+    // value | index is empty
+    if (value === "" || typeof value === "undefined") return undefined;
+
+    // index === 0
+    if (index === 0) !!this.unshift(value);
+
+    // index === this.length
+    if (index === this.length) !!this.push(value);
+
+    // index > 0 && index < this.length
+    let nodeAtIndex = this.get(index);
+    if (!nodeAtIndex) return undefined;
+
+    let newNode = new Node(value);
+    let nodeBeforeIndex = nodeAtIndex.prev;
+
+    (newNode.prev = nodeBeforeIndex), (nodeAtIndex.prev = newNode);
+    (newNode.next = nodeAtIndex), (nodeBeforeIndex.next = newNode);
+
+    this.length++;
+    return true;
+  }
+
   set(index, value) {
     // value | index is empty
     let foundNode = this.get(index);
@@ -269,5 +293,12 @@ console.log(list.set(0, 30));
 console.log(list.set(6, 550));
 
 console.log(list);
+
+console.log(list.printList());
+
+console.log("\n\n--------------INSERT METHOD--------------");
+
+console.log(list.insert(4, 250));
+console.log(list.insert(7, 500));
 
 console.log(list.printList());
