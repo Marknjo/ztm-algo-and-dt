@@ -10,9 +10,10 @@ import "./fouc-fix/fouc-fix";
 // import "./js/list-singly";
 // import "./js/stack";
 // import "./js/stacks-with-arrays";
-import "./js/stacks-with-linked-list";
+// import "./js/stacks-with-linked-list";
 // import "./js/queue";
 // import "./js/queues-with-stacks";
+import "./js/queues-with-lists";
 // import "./js/binary-search-tree";
 // import "./js/graph";
 
