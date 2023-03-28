@@ -27,6 +27,19 @@ class Queue {
     return this.size;
   }
 
+  dequeue() {
+    if (!this.#first) return undefined;
+
+    let firstInQueue = this.#first;
+    if (this.size === 1) {
+      this.#last = null;
+    }
+
+    this.#first = this.#first.next;
+    this.size--;
+    return firstInQueue;
+  }
+
   printQueue() {
     if (!this.#first) return [];
 
@@ -55,5 +68,10 @@ queue.enqueue("Amazon");
 queue.enqueue("BET");
 queue.enqueue("Twitter");
 queue.enqueue("LinkedIn");
+
+console.log(queue.printQueue());
+
+console.log("--------------DEQUEUE METHOD--------------");
+queue.dequeue();
 
 console.log(queue.printQueue());
