@@ -8,23 +8,35 @@ class Node {
 class Stack {
   #first = null;
   #last = null;
-  length = 0;
+  size = 0;
 
   push(value) {
     if (value === "" || typeof value === "undefined") return undefined;
 
     let newNode = new Node(value);
-    this.length++;
+    this.size++;
     if (!this.#first) {
       this.#first = newNode;
       this.#last = newNode;
-      return this;
+      return this.size;
     }
 
     newNode.next = this.#first;
     this.#first = newNode;
 
-    return this;
+    return this.size;
+  }
+
+  pop() {
+    if (!this.#first) return null;
+
+    let currentHead = this.#first;
+    if (this.size === 1) this.#last = null;
+
+    this.#first = this.#first.next;
+    this.size--;
+
+    return currentHead;
   }
 
   printStack() {
@@ -52,7 +64,23 @@ console.log("--------------PUSH METHOD--------------");
 stack.push("Google");
 stack.push("Facebook");
 stack.push("Amazon");
+stack.push("BET");
+stack.push("Twitter");
+stack.push("LinkedIn");
 
 console.log(stack.printStack());
 
-console.log("--------------POP METHOD--------------");
+console.log("\n\n--------------POP METHOD--------------");
+
+stack.pop();
+stack.pop();
+stack.pop();
+stack.pop();
+stack.push("YouTube");
+stack.push("Twitch");
+stack.pop();
+stack.pop();
+stack.pop();
+stack.pop();
+
+console.log(stack.printStack());
