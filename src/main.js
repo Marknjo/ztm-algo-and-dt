@@ -13,7 +13,7 @@ import "./fouc-fix/fouc-fix";
 // import "./js/stacks-with-linked-list";
 // import "./js/queue";
 // import "./js/queues-with-stacks";
-import "./js/queues-with-lists";
+// import "./js/queues-with-lists";
 // import "./js/binary-search-tree";
 // import "./js/graph";
 
@@ -23,6 +23,7 @@ import "./js/queues-with-lists";
 // import "./js/recursion-fib";
 // import "./js/binary-BFS";
 // import "./js/binary-DFS";
+import "./js/binary-BST";
 
 /// Sorting
 // import "./js/sorting";
