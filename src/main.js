@@ -23,7 +23,8 @@ import "./fouc-fix/fouc-fix";
 // import "./js/recursion-fib";
 // import "./js/binary-BFS";
 // import "./js/binary-DFS";
-import "./js/binary-BST";
+// import "./js/binary-BST";
+import "./js/binary-BFS-v2";
 
 /// Sorting
 // import "./js/sorting";
