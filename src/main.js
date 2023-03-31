@@ -26,7 +26,8 @@ import "./fouc-fix/fouc-fix";
 // import "./js/binary-BST";
 // import "./js/binary-BFS-v2";
 // import "./js/binary-DFS-v2";
-import "./js/algo/linear-search";
+// import "./js/algo/linear-search";
+import "./js/algo/binary-search";
 
 /// Sorting
 // import "./js/sorting";
