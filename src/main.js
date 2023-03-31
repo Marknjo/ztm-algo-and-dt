@@ -17,7 +17,7 @@ import "./fouc-fix/fouc-fix";
 // import "./js/binary-search-tree";
 // import "./js/graph";
 
-/// Algorithms
+/// Data Structures & Algorithms
 // import "./js/recursion";
 // import "./js/recursion-factorial";
 // import "./js/recursion-fib";
@@ -25,7 +25,8 @@ import "./fouc-fix/fouc-fix";
 // import "./js/binary-DFS";
 // import "./js/binary-BST";
 // import "./js/binary-BFS-v2";
-import "./js/binary-DFS-v2";
+// import "./js/binary-DFS-v2";
+import "./js/algo/linear-search";
 
 /// Sorting
 // import "./js/sorting";
