@@ -9,3 +9,4 @@
 // export * from "./coding-challenges-03-15";
 // export * from "./coding-challenges-03-19";
 // export * from "./coding-challenges-03-22";
+export * from "./cc-05-08";
