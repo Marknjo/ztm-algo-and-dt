@@ -7,6 +7,9 @@ import "./js/ztm";
 /// Coding challenges
 import "./js/coding-challenges";
 
+/// Steven Grinder Course
+import "./js/st-gr";
+
 /* Default text */
 document.querySelector("#app").innerHTML = `
   <div>
