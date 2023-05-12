@@ -76,32 +76,196 @@ class TimeLimitedCache {
    */
   set(key, value, duration) {
     const hasKey = this.cache.has(key);
-    if (hasKey) {
-      return this._hasExpired(key);
+
+    if (!hasKey) {
+      this.cache.set(key, { value, duration, addedAt: Date.now() });
+      return false;
     }
+
+    // Key is not accessible if it has expired
+    const keyHasExpired = this._hasExpired(key);
+    if (keyHasExpired) return;
+
+    /// has key and not expired
+    this.cache.set(key, { value, duration, addedAt: Date.now() });
+    return !keyHasExpired; // true
   }
 
   /**
    * @param {number} key
    * @return {number} value associated with key
    */
-  get(key) {}
+  get(key) {
+    const hasKey = this.cache.has(key);
+    if (!hasKey) return -1;
+
+    const keyHasExpired = this._hasExpired(key);
+    if (!keyHasExpired) return -1;
+
+    return this.cache.get(key).value;
+  }
 
   /**
    * @return {number} count of non-expired keys
    */
-  count() {}
+  count() {
+    let count = 0;
+
+    this.cache.forEach((_1, key) => {
+      if (!this._hasExpired(key)) {
+        count++;
+      }
+    });
+    return count;
+  }
 
   _hasExpired(key) {
     const currentTime = Date.now();
     const duration = this.cache.get(key).duration;
     const addedAt = this.cache.get(key).addedAt;
+
     return currentTime - addedAt > duration ? false : true;
   }
 }
 
-TimeLimitedCache.prototype.set = function (key, value, duration) {};
+let getTimer;
+let countTimer;
+let setTimer;
+/// helpers with time - duration in milliseconds
+const getKeyCacheAfter = (cache, key, duration, clear = false) => {
+  if (clear && getTimer) clearTimeout(getTimer);
+  getTimer = setTimeout(() => {
+    console.log(cache.get(key));
+  }, duration);
+};
 
-TimeLimitedCache.prototype.get = function (key) {};
+const countActiveCacheAfter = (cache, duration, clear = false) => {
+  if (clear && countTimer) clearTimeout(countTimer);
+  countTimer = setTimeout(() => {
+    console.log(cache.count());
+  }, duration);
+};
 
-TimeLimitedCache.prototype.count = function () {};
+const setCacheAfter = (
+  cache,
+  key,
+  value,
+  duration,
+  timerDuration,
+  clear = false
+) => {
+  if (clear && setTimer) clearTimeout(setTimer);
+  setTimer = setTimeout(() => {
+    console.log(cache.set(key, value, duration));
+  }, timerDuration);
+};
+
+/// Data;
+const data1 = ["set", "get", "count", "get"];
+
+function setData1() {
+  /// Clear older timers
+  clearTimeout(setTimer);
+  clearTimeout(countTimer);
+  clearTimeout(getTimer);
+
+  setTimeout(() => {
+    const cache = new TimeLimitedCache();
+
+    console.log(cache.set(1, 42, 100));
+    getKeyCacheAfter(cache, 1, 50);
+
+    countActiveCacheAfter(cache, 50);
+
+    getKeyCacheAfter(cache, 150);
+  }, 0);
+}
+
+function setData2() {
+  setTimeout(() => {
+    console.log("\n");
+
+    /// Clear older timers
+    clearTimeout(setTimer);
+    clearTimeout(countTimer);
+    clearTimeout(getTimer);
+
+    const cache = new TimeLimitedCache();
+    /// Set data
+    console.log(cache.set(1, 42, 100));
+
+    setCacheAfter(cache, 1, 50, 100, 40);
+
+    getKeyCacheAfter(cache, 1, 50);
+
+    getKeyCacheAfter(cache, 1, 120);
+
+    getKeyCacheAfter(cache, 1, 200);
+
+    countActiveCacheAfter(cache, 250);
+  }, 2000);
+}
+
+setData1();
+setData2();
+
+// console.log(cache.set(1, 42, 100));
+// getKeyCacheAfter(1, 50);
+// countActiveCacheAfter(50);
+// getKeyCacheAfter(1, 150);
+class TimeLimitedCacheV2 {
+  #cache;
+  #timeout;
+  constructor() {
+    this.cache = {};
+    this.timeout = {};
+  }
+
+  set(key, value, duration) {
+    if (this.cache[key]) {
+      clearTimeout(this.timeout[key]);
+      delete this.timeout[key];
+      this.cache[key] = value;
+      this.timeout[key] = setTimeout(() => delete this.cache[key], duration);
+      return true;
+    }
+
+    this.cache[key] = value;
+    this.timeout[key] = setTimeout(() => delete this.cache[key], duration);
+    return false;
+  }
+
+  get(key) {
+    if (!this.cache[key]) return -1;
+
+    return this.cache[key];
+  }
+
+  count() {
+    return Object.keys(this.cache).length;
+  }
+}
+
+/* interface TTLValue {
+  value: number;
+  timer: ReturnType<typeof setTimeout>;
+}
+
+class TimeLimitedCacheV3 {
+  cache = new Map<number, TTLValue>()
+
+  set(key: number, value: number, duration: number): boolean {
+      const exists = this.cache.has(key)
+      if (exists) clearTimeout(this.cache.get(key).timer)
+      this.cache.set(key, {value, timer: setTimeout(() => this.cache.delete(key), duration)})
+      return exists
+  }
+
+  get(key: number): number {
+      return this.cache.has(key) ? this.cache.get(key).value : -1
+  }
+
+count(): number {
+      return this.cache.size
+  }
+} */
