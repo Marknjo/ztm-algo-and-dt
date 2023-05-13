@@ -16,4 +16,4 @@
 
 // Interview question
 // export * from "./cc-05-13-interview-2";
-export * from "./cc-05-13-interview-1";
+// export * from "./cc-05-13-interview-1";
