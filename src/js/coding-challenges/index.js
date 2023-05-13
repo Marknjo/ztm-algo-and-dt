@@ -13,3 +13,7 @@
 // export * from "./cc-05-09-GG";
 // export * from "./cc-05-10-matrix";
 // export * from "./cc-05-10-cache";
+
+// Interview question
+// export * from "./cc-05-13-interview-2";
+export * from "./cc-05-13-interview-1";
