@@ -13,6 +13,33 @@ export class LinkedList {
   all() {
     return this;
   }
+
+  push(value) {
+    if (this.#validate(value)) return false;
+
+    const newNode = new Node(value);
+
+    if (!this.#head) {
+      this.#head = newNode;
+      this.#tail = this.#head;
+    } else {
+      // const temp = this.#tail;
+      // this.#tail = newNode;
+      // temp.next = this.#tail;
+
+      // Alternative - short
+      this.#tail.next = newNode;
+      this.#tail = newNode;
+    }
+
+    this.length += 1;
+    return this;
+  }
+
+  #validate(value) {
+    if (`${value}`.trim() !== '' || value !== undefined || value !== null)
+      return false;
+  }
 }
 
 const linkedList = new LinkedList();
