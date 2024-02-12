@@ -75,6 +75,24 @@ export class LinkedList {
     return this;
   }
 
+  get(index) {
+    if (index >= this.length || index < 0 || !isFinite(index)) return false;
+
+    if (index === 0) return this.#head.value;
+    if (index === this.length - 1) return this.#tail.value;
+
+    let nextNode = this.#head;
+    let currentIndex = 1;
+
+    while (Boolean(nextNode.next)) {
+      if (index === currentIndex) {
+        return nextNode.next.value;
+      }
+      currentIndex++;
+      nextNode = nextNode.next;
+    }
+  }
+
   #validate(value) {
     if (`${value}`.trim() !== '' || value !== undefined || value !== null)
       return false;
