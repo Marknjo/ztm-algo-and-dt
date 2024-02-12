@@ -62,6 +62,19 @@ export class LinkedList {
     return deletedNode;
   }
 
+  unshift(value) {
+    if (this.#validate(value)) return false;
+
+    const newNode = new Node(value);
+    const head = this.#head;
+    this.#head = newNode;
+    this.#head.next = head;
+
+    this.length += 1;
+
+    return this;
+  }
+
   #validate(value) {
     if (`${value}`.trim() !== '' || value !== undefined || value !== null)
       return false;
