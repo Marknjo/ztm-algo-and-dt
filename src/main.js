@@ -1,17 +1,20 @@
-import "./css/style.css";
-import "./fouc-fix/fouc-fix";
+import './css/style.css';
+import './fouc-fix/fouc-fix';
 
 /* ZTM */
-import "./js/ztm";
+import './js/ztm';
 
 /// Coding challenges
-import "./js/coding-challenges";
+import './js/coding-challenges';
 
 /// Steven Grinder Course
-import "./js/st-gr";
+import './js/st-gr';
+
+/// 2024 Review Core Concepts
+import './js/review-024';
 
 /* Default text */
-document.querySelector("#app").innerHTML = `
+document.querySelector('#app').innerHTML = `
   <div>
     <h1>JavaScript Algorithm and Data Structures</h1>
     <div class="card">
