@@ -36,6 +36,32 @@ export class LinkedList {
     return this;
   }
 
+  pop() {
+    if (this.length === 0) return false;
+    if (this.length === 1) {
+      this.#head = null;
+      this.#tail = null;
+      return this;
+    }
+
+    let currentNode = this.#head;
+    let prevNode = currentNode;
+
+    while (Boolean(currentNode.next)) {
+      prevNode = currentNode;
+
+      currentNode = currentNode.next;
+    }
+
+    prevNode.next = null;
+    const deletedNode = currentNode;
+    this.#tail = prevNode;
+
+    this.length -= 1;
+
+    return deletedNode;
+  }
+
   #validate(value) {
     if (`${value}`.trim() !== '' || value !== undefined || value !== null)
       return false;
