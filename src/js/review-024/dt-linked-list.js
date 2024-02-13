@@ -76,6 +76,7 @@ export class LinkedList {
   }
 
   shift() {
+    if (this.length === 0) return false;
     const currentHead = this.#head;
     const nextNode = currentHead.next;
     this.#head = nextNode;
@@ -86,7 +87,7 @@ export class LinkedList {
   }
 
   get(index) {
-    if (index >= this.length || index < 0 || !isFinite(index)) return false;
+    if (index >= this.length || index < 0 || !isFinite(index)) return -1;
 
     if (index === 0) return this.#head.value;
     if (index === this.length - 1) return this.#tail.value;
@@ -101,6 +102,32 @@ export class LinkedList {
       currentIndex++;
       nextNode = nextNode.next;
     }
+  }
+
+  find(value) {
+    if (this.#validate(value)) return -1;
+    if (this.length === 1) {
+      return this.#head.value === value ? this.#head : -1;
+    }
+
+    let currentNode = this.#head;
+    let index = 0;
+
+    while (Boolean(currentNode.next)) {
+      console.log(currentNode.value === value);
+
+      if (currentNode.value === value) {
+        currentNode.next = null;
+        return {
+          index,
+          ...currentNode,
+        };
+      }
+      index++;
+      currentNode = currentNode.next;
+    }
+
+    return -1;
   }
 
   values() {
@@ -122,6 +149,8 @@ export class LinkedList {
   #validate(value) {
     if (`${value}`.trim() !== '' || value !== undefined || value !== null)
       return false;
+
+    return true;
   }
 }
 
@@ -173,3 +202,11 @@ console.log(linkedList.all());
 console.log('\n---values()---');
 const values = linkedList.values();
 console.log(values);
+
+// Find Value
+console.log('\n---find()---');
+const foundValue1 = linkedList.find(2); // expects node {value: 2, next: null}
+console.log(foundValue1);
+
+const foundValue2 = linkedList.find(6); // expects node -1
+console.log(foundValue2);
