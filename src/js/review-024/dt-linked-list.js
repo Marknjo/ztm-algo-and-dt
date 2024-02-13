@@ -75,6 +75,16 @@ export class LinkedList {
     return this;
   }
 
+  shift() {
+    const currentHead = this.#head;
+    const nextNode = currentHead.next;
+    this.#head = nextNode;
+    currentHead.next = null;
+
+    this.length -= 1;
+    return currentHead;
+  }
+
   get(index) {
     if (index >= this.length || index < 0 || !isFinite(index)) return false;
 
@@ -100,13 +110,16 @@ export class LinkedList {
 }
 
 const linkedList = new LinkedList();
+console.log('---push()---');
 linkedList.push(1);
 linkedList.push(2);
 linkedList.push(3);
 linkedList.push(4);
 linkedList.push(5);
 const res6 = linkedList.push(6);
+console.log(res6);
 
+console.log('\n---get() by id---');
 console.log(res6);
 const getRes = linkedList.get(-1); // expects false
 console.log(getRes);
@@ -120,6 +133,7 @@ const getRes4 = linkedList.get(1); // expects 2
 console.log({ getRes2, getRes3, getRes4 });
 
 // Unshift
+console.log('\n---unshift()---');
 const unS1 = linkedList.unshift(0);
 const unS2 = linkedList.unshift(-1);
 
@@ -127,7 +141,19 @@ console.log(unS1);
 console.log(unS2);
 
 // Pop
-console.log('---pop---');
+console.log('\n---pop()---');
 
 const popS1 = linkedList.pop(); // expect length = 7
 console.log({ popS1 }, linkedList.all());
+
+// Delete head node
+console.log('\n---shift()---');
+const deletedNode = linkedList.shift();
+
+console.log(deletedNode);
+console.log(linkedList.all());
+
+// All values
+console.log('\n---values()---');
+const values = linkedList.values();
+console.log(values);
