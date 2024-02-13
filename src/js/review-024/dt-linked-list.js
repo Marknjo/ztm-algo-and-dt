@@ -114,10 +114,7 @@ export class LinkedList {
     let index = 0;
 
     while (Boolean(currentNode.next)) {
-      console.log(currentNode.value === value);
-
       if (currentNode.value === value) {
-        currentNode.next = null;
         return {
           index,
           ...currentNode,
@@ -138,12 +135,31 @@ export class LinkedList {
     let nextNode = this.#head;
 
     while (Boolean(nextNode.next)) {
-      values.push(nextNode.next.value);
+      values.push(nextNode.value);
 
       nextNode = nextNode.next;
     }
 
+    values.push(this.#tail.value);
+
     return values;
+  }
+
+  reverse() {
+    let node = this.#head;
+    this.#head = this.#tail;
+    this.#tail = node;
+    let nextNode;
+    let prevNode = null;
+
+    for (let i = 0; i < this.length; i++) {
+      nextNode = node.next;
+      node.next = prevNode;
+      prevNode = node;
+      node = nextNode;
+    }
+
+    return this;
   }
 
   #validate(value) {
@@ -208,5 +224,10 @@ console.log('\n---find()---');
 const foundValue1 = linkedList.find(2); // expects node {value: 2, next: null}
 console.log(foundValue1);
 
-const foundValue2 = linkedList.find(6); // expects node -1
-console.log(foundValue2);
+// const foundValue2 = linkedList.find(6); // expects node -1
+// console.log(foundValue2);
+
+console.log('\n---reverse()---');
+console.log(linkedList.values());
+linkedList.reverse();
+console.log(linkedList.values());
