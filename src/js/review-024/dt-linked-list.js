@@ -103,6 +103,22 @@ export class LinkedList {
     }
   }
 
+  values() {
+    if (this.length === 0) return [];
+    if (this.length === 1) [this.#head.value];
+
+    const values = [];
+    let nextNode = this.#head;
+
+    while (Boolean(nextNode.next)) {
+      values.push(nextNode.next.value);
+
+      nextNode = nextNode.next;
+    }
+
+    return values;
+  }
+
   #validate(value) {
     if (`${value}`.trim() !== '' || value !== undefined || value !== null)
       return false;
