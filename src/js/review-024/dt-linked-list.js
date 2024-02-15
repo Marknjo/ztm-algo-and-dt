@@ -99,11 +99,38 @@ export class LinkedList {
 
     if (index === 0) return this.unshift(value);
 
-    if (index === this.length - 1) return this.push();
+    if (index === this.length - 1) return this.push(value);
 
     const newNode = new Node(value);
     const prevNode = this.get(index - 1);
     const nextNode = prevNode.next;
+
+    newNode.next = nextNode;
+    prevNode.next = newNode;
+
+    this.length++;
+    return this;
+  }
+
+  insertByValue(value, toBeReplaced) {
+    const foundNextNode = this.find(toBeReplaced);
+
+    // zero indexed
+    if (
+      this.#validate(value) ||
+      this.#validate(toBeReplaced) ||
+      foundNextNode === -1
+    )
+      return -1;
+
+    if (foundNextNode.index === 0) return this.unshift(value);
+
+    if (foundNextNode.index === this.length - 1) return this.push(value);
+
+    const newNode = new Node(value);
+    const prevNode = this.get(foundNextNode.index - 1);
+
+    const nextNode = foundNextNode;
 
     newNode.next = nextNode;
     prevNode.next = newNode;
