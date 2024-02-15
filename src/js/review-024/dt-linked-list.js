@@ -86,6 +86,32 @@ export class LinkedList {
     return currentHead;
   }
 
+  insertByIndex(value, index) {
+    // zero indexed
+    if (
+      this.#validate(value) ||
+      this.#validate(index) ||
+      index >= this.length ||
+      (this.length === 0 && index > 0) ||
+      index < 0
+    )
+      return undefined;
+
+    if (index === 0) return this.unshift(value);
+
+    if (index === this.length - 1) return this.push();
+
+    const newNode = new Node(value);
+    const prevNode = this.get(index - 1);
+    const nextNode = prevNode.next;
+
+    newNode.next = nextNode;
+    prevNode.next = newNode;
+
+    this.length++;
+    return this;
+  }
+
   get(index, asValue) {
     if (index >= this.length || index < 0 || !isFinite(index)) return -1;
 
