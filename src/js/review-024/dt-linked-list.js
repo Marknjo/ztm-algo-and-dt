@@ -86,18 +86,19 @@ export class LinkedList {
     return currentHead;
   }
 
-  get(index) {
+  get(index, asValue) {
     if (index >= this.length || index < 0 || !isFinite(index)) return -1;
 
-    if (index === 0) return this.#head.value;
-    if (index === this.length - 1) return this.#tail.value;
+    if (index === 0) return asValue ? this.#head.value : this.#head;
+    if (index === this.length - 1)
+      return asValue ? this.#tail.value : this.#tail;
 
     let nextNode = this.#head;
     let currentIndex = 1;
 
     while (Boolean(nextNode.next)) {
       if (index === currentIndex) {
-        return nextNode.next.value;
+        return asValue ? nextNode.next.value : nextNode.next;
       }
       currentIndex++;
       nextNode = nextNode.next;
@@ -106,6 +107,7 @@ export class LinkedList {
 
   find(value) {
     if (this.#validate(value)) return -1;
+
     if (this.length === 1) {
       return this.#head.value === value ? this.#head : -1;
     }
@@ -127,7 +129,7 @@ export class LinkedList {
     return -1;
   }
 
-  values() {
+  print() {
     if (this.length === 0) return [];
     if (this.length === 1) [this.#head.value];
 
@@ -216,7 +218,7 @@ console.log(linkedList.all());
 
 // All values
 console.log('\n---values()---');
-const values = linkedList.values();
+const values = linkedList.print();
 console.log(values);
 
 // Find Value
@@ -228,6 +230,17 @@ console.log(foundValue1);
 // console.log(foundValue2);
 
 console.log('\n---reverse()---');
-console.log(linkedList.values());
+console.log('Before reverse 🚩: ', linkedList.print());
 linkedList.reverse();
-console.log(linkedList.values());
+console.log('Reversed ⛳: ', linkedList.print());
+
+console.log('\n---insertByIndex()---');
+console.log(linkedList.insertByIndex(12, -1)); // undefined
+
+linkedList.insertByIndex(10, 3); // insert 10 between 3 & 2 -> 3,10,2
+console.log(linkedList.print());
+
+console.log('\n---insertByValue()---');
+linkedList.insertByValue(20, 4); // insert 10 between 5 & 4 -> 5,20,4
+console.log(linkedList.print());
+console.log(linkedList.insertByValue(20, -2)); // undefined
